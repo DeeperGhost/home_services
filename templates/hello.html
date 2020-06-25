@@ -1,13 +1,33 @@
+<!DOCTYPE html>
 <html>
+
  <head>
   <meta charset="utf-8">
-  <title>Тег FORM, атрибут enctype</title>
+  <title>Отправка файла на сервер</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styleTest.css') }}">
  </head>
- <body>
-  <form action="handler.php"
-   enctype="multipart/form-data" method="post">
-   <p>Загрузите файл с картинкой</p>
-   <p><input type="file" name="pic"></p>
-  </form>
+
+<body>
+
+
+   <h1>File input</h1>
+
+
+
+
+     <form enctype="multipart/form-data" method="post">
+
+        <label for="fusk1" class = lab1>Open</label>
+        <input  id = "fusk1"type="file" name="files" multiple="true" class="inputfile">
+
+         <label for="fusk" class = lab2>Sent</label>
+        <input id="fusk"type="submit" value="Sent" class="inputfile">
+
+     </form>
+
+
+
+
+
  </body>
 </html>

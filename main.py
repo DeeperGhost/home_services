@@ -9,17 +9,18 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Index Page'
+    return render_template('index.html')
 
 
 @app.route('/hello/')
-@app.route('/hello/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
+    pathTest = "C:/Users/007/PycharmProjects/FlaskServTest/data/"
+    pathWork = "E:/FromTelephon/"
     if flask.request.method == "POST" :
 
         files = flask.request.files.getlist("files")
@@ -28,7 +29,7 @@ def upload():
             return render_template('upload.html')
 
         for file in files:
-            file.save('C:/Users/007/PycharmProjects/FlaskServTest/data/'+file.filename)
+            file.save(pathWork+file.filename)
     return render_template('upload.html')
 
 

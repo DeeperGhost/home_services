@@ -6,24 +6,39 @@
 
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='header.css') }}">
  </head>
+
  <body>
- <div header class="codrops-header">
-  <h1>File input</h1>
-  <div class = "content">
-   <div class ="box">
-    <form enctype="multipart/form-data" method="post">
 
-       <input  type="file" name="files" multiple="true" >
+ <header>
+    <div class="codrops-links">
+        <a href="{{ url_for('index') }}" class="linkhead">Дом</a>
+		<a href="{{ url_for('upload') }}" class="linkhead">Загрузка</a>
+        <a href="{{ url_for('hello') }}" class="linkhead">Показатели</a>
+    </div>
+ </header>
 
-       <label for="fusk">Choose a file</label>
-       <input id="fusk"type="submit" value="Отправить" class="inputfile">
 
-    </form>
-   </div>
- </div>
 
- </div>
+
+
+
+   <h1>File input</h1>
+
+
+
+     <form enctype="multipart/form-data" method="post">
+
+        <label for="fusk1" class = lab1>Open</label>
+        <input  id = "fusk1"type="file" name="files" multiple="true" class="inputfile">
+
+         <label for="fusk" class = lab2>Sent</label>
+        <input id="fusk"type="submit" value="Sent" class="inputfile">
+
+     </form>
+
+
 
 
  </body>
