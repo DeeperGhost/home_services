@@ -1,45 +1,59 @@
-from flask import Flask, url_for, flash
 import flask
-from flask import request
-from flask import render_template
-from werkzeug import Request
 
+from config import HOST, PORT, DEBUG
+from config import indicatorsPath, pathWork
+
+
+
+from flask import Flask, json, request
+from flask import render_template
+
+
+
+
+
+from views.indicators import indicators
+from views.upload import upload
 
 app = Flask(__name__)
+app.register_blueprint(indicators)
+app.register_blueprint(upload)
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    f = open(indicatorsPath, 'r')
+    indicator = f.readline()
+    f.close()
+
+    hum = indicator[0:2]
+    temp = indicator[3:5]
+
+    return render_template('index.html', hum= hum, temp= temp)
 
 
-@app.route('/hello/')
-def hello(name=None):
-    return render_template('hello.html', name=name)
 
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    pathTest = "C:/Users/007/PycharmProjects/FlaskServTest/data/"
-    pathWork = "E:/FromTelephon/"
-    if flask.request.method == "POST" :
-
-        files = flask.request.files.getlist("files")
-        # Не пустой ли список файлов
-        if files[0].filename == '':
-            return render_template('upload.html')
-
-        for file in files:
-            file.save(pathWork+file.filename)
-    return render_template('upload.html')
 
 
-@app.route('/upload2', methods=['GET', 'POST'])
-def upload_file2():
 
-    return render_template('upload2.html')
+
+
+
+@app.route('/test')
+def test(name=None):
+    return render_template('test.html', name=name)
+
+
+@app.route('/get_len', methods=['GET', 'POST'])
+def get_len():
+    name = request.form['name'];
+    return json.dumps({'len': len(name)})
+
+
 
 
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.102',port= 5000, debug=True)
+    app.run(host=HOST,port= PORT, debug=DEBUG)

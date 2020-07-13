@@ -4,39 +4,69 @@
  <head>
   <meta charset="utf-8">
   <title>Отправка файла на сервер</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='reset.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/header.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
 
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styleTest.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/test.css') }}">
 
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='header.css') }}">
+
+      <script type=text/javascript src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
  </head>
 
 <body>
 
 
-<header>
-    <ul class="menu">
-        <li><a href="{{ url_for('index') }}" class="linkhead">Изба</a></li>
-        <li><a href="{{ url_for('upload') }}" class="linkhead">Загрузка</a></li>
-        <li><a href="{{ url_for('hello') }}" class="linkhead">Показатели</a></li>
-    </ul>
-</header>
+    <header>
+        <ul class="menu">
+            <li><a href="{{ url_for('index') }}" class="linkhead">Изба</a></li>
+            <li><a href="{{ url_for('upload.uploadFiles') }}" class="linkhead">Загрузка</a></li>
+            <li><a href="{{ url_for('indicators.indicatorsShow') }}" class="linkhead">Показатели</a></li>
+            <li><a href="{{ url_for('test') }}" class="linkhead">Тест</a></li>
+        </ul>
+    </header>
+
+
+<h1>Welcome!</h1>
+<button id = "factorial">Click Here!</button>
+
+<p>Factorial: <span id='factor'>0</span></p>
 
 
 
-     <form enctype="multipart/form-data" method="post">
+<script>
+        function get_len() {
+            $.ajax({
+                type: "POST",
+                url: "/get_len",
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    var json = jQuery.parseJSON(response)
+                    $('#len').html(json.len)
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+    <form action="/get_len" method="post" name="form">
+        <label for="name">Введите текст:</label>
+        <input id="name" name="name" type="text">
+        <input type="button" value="Отправить" onclick="get_len();">
+    </form>
+    <div id="len"></div>
 
-        <label for="fusk1" class = lab1>Open</label>
-        <input  id = "fusk1"type="file" name="files" multiple="true" class="inputfile">
-
-         <label for="fusk" class = lab2>Sent</label>
-        <input id="fusk"type="submit" value="Sent" class="inputfile">
-
-     </form>
 
 
 
-
+<h2 class="pisun">Теребонька</h2>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
  </body>
 </html>

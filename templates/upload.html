@@ -4,39 +4,48 @@
   <meta charset="utf-8">
   <title>Отправка файла на сервер</title>
 
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/header.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
 
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='header.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/multiform.css') }}">
+
+     <script type=text/javascript src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
+     <script type="text/javascript" src="{{ url_for('static', filename='js/uploadFiles.js') }}"></script>
+
  </head>
 
  <body>
 
- <header>
-    <div class="codrops-links">
-        <a href="{{ url_for('index') }}" class="linkhead">Дом</a>
-		<a href="{{ url_for('upload') }}" class="linkhead">Загрузка</a>
-        <a href="{{ url_for('hello') }}" class="linkhead">Показатели</a>
-    </div>
- </header>
-
-
-
-
+    <header>
+        <ul class="menu">
+            <li><a href="{{ url_for('index') }}" class="linkhead">Изба</a></li>
+            <li><a href="{{ url_for('upload.uploadFiles') }}" class="linkhead">Загрузка</a></li>
+            <li><a href="{{ url_for('indicators.indicatorsShow') }}" class="linkhead">Показатели</a></li>
+            <li><a href="{{ url_for('test') }}" class="linkhead">Тест</a></li>
+        </ul>
+    </header>
 
 
    <h1>File input</h1>
 
 
 
-     <form enctype="multipart/form-data" method="post">
+     <form id="data" enctype="multipart/form-data" method="post" class="multform">
 
         <label for="fusk1" class = lab1>Open</label>
         <input  id = "fusk1"type="file" name="files" multiple="true" class="inputfile">
 
-         <label for="fusk" class = lab2>Sent</label>
-        <input id="fusk"type="submit" value="Sent" class="inputfile">
+        <label for="fusk" class = lab2>Sent</label>
+        <input id="fusk"type="submit" value="Submit" class="inputfile">
 
      </form>
+
+    <h1>Progress: <span id='pBar'>0%</span></h1>
+
+    <!--<span id='pBar2'>0</span>-->
+    <h1>Успех - <span id='pBar2'>0</span></h1>
+
 
 
 
