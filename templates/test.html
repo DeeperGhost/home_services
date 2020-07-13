@@ -4,14 +4,23 @@
  <head>
   <meta charset="utf-8">
   <title>Отправка файла на сервер</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='reset.css') }}">
+
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styleTest.css') }}">
+
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='header.css') }}">
  </head>
 
 <body>
 
 
-   <h1>File input</h1>
-
+<header>
+    <ul class="menu">
+        <li><a href="{{ url_for('index') }}" class="linkhead">Изба</a></li>
+        <li><a href="{{ url_for('upload') }}" class="linkhead">Загрузка</a></li>
+        <li><a href="{{ url_for('hello') }}" class="linkhead">Показатели</a></li>
+    </ul>
+</header>
 
 
 
