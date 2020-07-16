@@ -18,47 +18,57 @@
     <nav class="menu">
         <ul>
             <li><a href="{{ url_for('index') }}" class="linkhead">Изба</a></li>
-            <li><a href="{{ url_for('upload.uploadFiles') }}" class="linkhead">Загрузка</a></li>
-            <li><a href="{{ url_for('indicators.indicatorsShow') }}" class="linkhead">Показатели</a></li>
+            <li><a href="{{ url_for('upload.upload_files') }}" class="linkhead">Загрузка</a></li>
+            <li><a href="{{ url_for('indicators.indicators_show') }}" class="linkhead">Показатели</a></li>
             <li><a href="{{ url_for('test') }}" class="linkhead">Тест</a></li>
         </ul>
     </nav>
 </header>
 
 <body>
-    <a href ="{{url_for('indicators.douwnloadCSV')}}" class="lnkIndicators"> грузить csv </a>
-    добавить
 
-    <table>
+    <div class="left_col">
+        <ul>
+            <li><a href="" >add Node</a></li>
+            <li><a href="{{url_for('indicators.download_csv')}}" >Import CSV</a></li>
+            <li><a href="{{url_for('indicators.export_csv')}}" >Export CSV</a></li>
+            <li><a href="" >Del Node</a></li>
+            <li><a href="" >Del All</a></li>
+        </ul>
+    </div>
 
-        <tr>
-            <th>ID</th>
-            <th>Дата показаний</th>
-            <th>Тариф</th>
-            <th>Показания</th>
-        </tr>
-        {% if t == "" %}
-        <td>
-            <th>0</th>
-            <th>0</th>
-            <th>0</th>
-            <th>0</th>
-        </td>
-        {% else %}
-            {% for i in t%}
+    <div class="right_col">
+        <table>
+
             <tr>
-                <td> {{i.id}}</td>
-                <td> {{i.month}}</td>
-                <td> {{i.typeMeter}}</td>
-                <td> {{i.meter}}</td>
+                <th>ID</th>
+                <th>Дата показаний</th>
+                <th>Тариф</th>
+                <th>Показания</th>
             </tr>
-            {% endfor %}
-        {% endif %}
+            {% if t == "" %}
+            <td>
+                <th>0</th>
+                <th>0</th>
+                <th>0</th>
+                <th>0</th>
+            </td>
+            {% else %}
+                {% for i in t%}
+                <tr>
+                    <td> {{i.id}}</td>
+                    <td> {{i.month}}</td>
+                    <td> {{i.typeMeter}}</td>
+                    <td> {{i.meter}}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
 
-    </table>
+        </table>
 
 
 
+    </div>
 
 </body>
 </html>

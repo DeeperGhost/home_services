@@ -1,9 +1,9 @@
-#
 from sqlalchemy import Table, Column, Integer, String,  ForeignKey
 from PGdatabase import Base
 
-# структура данных Электро покаазаний
+
 class ELECTRO(Base):
+    # структура данных Электро покаазаний
     __tablename__ = 'ELECTRO'
 
     id = Column(Integer, primary_key=True)

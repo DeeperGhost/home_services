@@ -21,7 +21,7 @@ alert(fac(a2*a1));
 $(document).ready(function(){
     $('#factorial').click(function() {
         alert('Ouch! Stop poking me!'+ "\u{1F60D}" );
-        $("#factor").text(fac(10000n));
+        $("#factor").text(fac(20n));
     });
 });
 

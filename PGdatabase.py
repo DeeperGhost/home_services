@@ -7,9 +7,7 @@ from sqlalchemy import MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
-
 from config import POSTGRES_URL, POSTGRES_USER, POSTGRES_PW, POSTGRES_DB
-
 
 
 engine = create_engine('postgresql://' + POSTGRES_USER + ':' + POSTGRES_PW + '@localhost/' + POSTGRES_DB)
@@ -24,7 +22,7 @@ def initPGdb():
     Base.metadata.create_all(engine)
 
 
-def addElectro(month="00.00.0000", typeMeter= "По одноставочному тарифу", meter="000000"):
+def import_electro(month="00.00.0000", typeMeter= "По одноставочному тарифу", meter="000000"):
     # Функция для добавление записи в таблицу БД
     # на данный момент тестово импортит данные из csv
     from models.electro import ELECTRO
@@ -41,7 +39,7 @@ def addElectro(month="00.00.0000", typeMeter= "По одноставочному
         index += 1
 
 
-def selectElectro():
+def select_electro():
     # Выбор данных из БД
     from models.electro import ELECTRO
 
@@ -57,12 +55,10 @@ def versqlachemy():
 
 
 def readcsv():
-    # читает csv файл с данными по электричетсву () тестируемый варифнт
-    with open('data/1.csv', newline='',encoding='utf-8',) as csvfile:
-     spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
-     data = list(spamreader)
-     # spamreader.next()
-     return data
-
-
-
+    # читает csv файл с данными по электричетсву
+    # возвращает список() тестируемый варифнт
+    with open('data/1.csv', newline='', encoding='utf-8') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+        data = list(spamreader)
+        # spamreader.next()
+        return data
