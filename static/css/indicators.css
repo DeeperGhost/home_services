@@ -1,16 +1,21 @@
-.base{
+.electro_form {
+		border-collapse: collapse;
+    	border-spacing: 0;
+    	margin-left: auto;
+        margin-right: auto;
+    	overflow: hidden;
+}
+.input_metr{
+}
 
-
-  }
 .left_col{/* Левая колонка */
  float: left; /* Обтекание справа */
  width: 200px; /* Ширина колонки */
  margin-left: 30px; /* Отступ слева */
-
 }
+
 .right_col{/* Правая колонка */
  margin-left: 200px; /* Отступ слева */
-
 }
 
 table {
@@ -20,6 +25,7 @@ table {
     margin-right: auto;
 	overflow: hidden;
 }
+
 table th, table td {
 	border: 1px solid #888;
 	padding:3px;
@@ -27,6 +33,7 @@ table th, table td {
 	vertical-align: middle;
 	position: relative;
 }
+
 table th, table td {
 	border: 1px solid #888;
 	padding: 3px;
@@ -34,6 +41,7 @@ table th, table td {
 	vertical-align: middle;
 	position: relative;
 }
+
 table td:hover {
 	background: #fffabe;
 }

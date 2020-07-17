@@ -2,18 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <title>Home</title>
-
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/header.css') }}">
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/indicators.css') }}">
-
-
 </head>
-
-
 <header>
     <nav class="menu">
         <ul>
@@ -24,13 +18,12 @@
         </ul>
     </nav>
 </header>
-
 <body>
 
     <div class="left_col">
         <ul>
             <li><a href="" >add Node</a></li>
-            <li><a href="{{url_for('indicators.download_csv')}}" >Import CSV</a></li>
+            <li><a href="{{url_for('indicators.import_csv')}}" >Import CSV</a></li>
             <li><a href="{{url_for('indicators.export_csv')}}" >Export CSV</a></li>
             <li><a href="" >Del Node</a></li>
             <li><a href="" >Del All</a></li>
@@ -38,6 +31,13 @@
     </div>
 
     <div class="right_col">
+
+        <form action="/add_electro" method="POST" name="form" class="electro_form">
+            <input type="date" name="date" class="input_date">
+            <input type="number" name="number" class="input_metr">
+            <input type="submit" value="Отправить">
+        </form>
+
         <table>
 
             <tr>
@@ -63,12 +63,7 @@
                 </tr>
                 {% endfor %}
             {% endif %}
-
         </table>
-
-
-
     </div>
-
 </body>
 </html>

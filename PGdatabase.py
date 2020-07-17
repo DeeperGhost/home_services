@@ -1,8 +1,7 @@
 import sqlalchemy
 import csv
 
-from sqlalchemy import create_engine
-from sqlalchemy import MetaData
+from sqlalchemy import create_engine, MetaData
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
@@ -11,7 +10,6 @@ from config import POSTGRES_URL, POSTGRES_USER, POSTGRES_PW, POSTGRES_DB
 
 
 engine = create_engine('postgresql://' + POSTGRES_USER + ':' + POSTGRES_PW + '@localhost/' + POSTGRES_DB)
-
 metadata = MetaData(bind=engine)
 session = Session(bind=engine)
 Base = declarative_base()
@@ -43,15 +41,23 @@ def select_electro():
     # Выбор данных из БД
     from models.electro import ELECTRO
 
-    return session.query(ELECTRO)
+    return session.query(ELECTRO).order_by(ELECTRO.meter.desc())
     # for electro in session.query(ELECTRO):#.filter_by(month='24.06.2020'):
     #     print(electro.month)
     #     print(electro)
 
 
+def add_node_electro(month="", typeMeter="", meter=""):
+    #Добавить запись в таблицу electro
+    from models.electro import ELECTRO
+    node = ELECTRO(month=month, typeMeter=typeMeter, meter=meter)
+    session.add(node)
+    session.commit()
+
+
 def versqlachemy():
     # выводит версию подключеной sqlAlchemy
-    print("Версия SQLAlchemy:", sqlalchemy.__version__)  # посмотреть версию SQLALchemy
+    print("Версия SQLAlchemy:", sqlalchemy.__version__)
 
 
 def readcsv():
