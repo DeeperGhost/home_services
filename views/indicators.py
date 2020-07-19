@@ -1,12 +1,12 @@
+import datetime
 from flask import Blueprint, render_template
 from flask import request, jsonify
-import datetime
 
-# fkdgfdkbmfdpbm;dfmbmdf;bmdfbmdfmb
 from flask import Response
 
 from PGdatabase import admin_pg_db, import_electro, select_electro, readcsv
 from PGdatabase import drop_electro, add_node_electro, del_nodes_elctro
+
 
 from views.base_except_view import base_view_except
 from sqlalchemy.exc import SQLAlchemyError

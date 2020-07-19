@@ -1,15 +1,14 @@
-from sqlalchemy import Table, Column, Integer, String,  ForeignKey
-from PGdatabase import Base
+import csv
+from main import db
 
-
-class ELECTRO(Base):
+class ELECTRO(db.Model):
     # структура данных Электро покаазаний
     __tablename__ = 'ELECTRO'
 
-    id = Column(Integer, primary_key=True)
-    month = Column(String, nullable=True)
-    typeMeter = Column(String, nullable=True)
-    meter = Column(String, nullable=True)
+    id = db.Column(db.Integer, primary_key=True)
+    month = db.Column(db.String, nullable=True)
+    typeMeter = db.Column(db.String, nullable=True)
+    meter = db.Column(db.String, nullable=True)
 
     def __init__(self, month, typeMeter, meter):
         self.month = month
@@ -18,4 +17,6 @@ class ELECTRO(Base):
 
     def __repr__(self):
         return '%d, %s, %s, %s' % (self.id, self.month, self.typeMeter, self.meter)
-        # return "<ELECTRO('%d, %s, %s, %s')>" % (self.id, self.month, self.typeMeter, self.meter)
+
+
+

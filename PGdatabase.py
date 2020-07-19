@@ -1,24 +1,22 @@
-import sqlalchemy
 import csv
 
-from sqlalchemy import create_engine, MetaData
+# from sqlalchemy import create_engine, MetaData
+#
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.orm import Session
 
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import Session
-
-from config import POSTGRES_URL, POSTGRES_USER, POSTGRES_PW, POSTGRES_DB
-
-
-engine = create_engine('postgresql://' + POSTGRES_USER + ':' + POSTGRES_PW + '@localhost/' + POSTGRES_DB)
-metadata = MetaData(bind=engine)
-session = Session(bind=engine)
-Base = declarative_base()
-
+# from models.electro import ELECTRO2, db
+# engine = create_engine('postgresql://' + POSTGRES_USER + ':' + POSTGRES_PW + '@localhost/' + POSTGRES_DB, echo=False)
+# metadata = MetaData(bind=engine)
+# session = Session(bind=engine)
+# Base = declarative_base()
+#
 
 
 def admin_pg_db():
     # создает все таблицы
-    Base.metadata.create_all(engine)
+    print("Create_ALL")
+    # Base.metadata.create_all(engine)
     #дропает все даблицы
     # Base.metadata.drop_all(engine)
 
@@ -26,7 +24,6 @@ def admin_pg_db():
 def import_electro(month="00.00.0000", typeMeter= "По одноставочному тарифу", meter="000000"):
     # Функция для добавление записи в таблицу БД
     # на данный момент тестово импортит данные из csv
-    from models.electro import ELECTRO
 
     with open('data/1.csv', newline='', encoding='utf-8') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
@@ -35,34 +32,22 @@ def import_electro(month="00.00.0000", typeMeter= "По одноставочно
     index = 1
     while index < len(data):
         add_node_electro(month=data[index][0], typeMeter=data[index][1], meter=data[index][2])
-        # node = ELECTRO(month=data[index][0], typeMeter=data[index][1], meter=data[index][2])
-        # session.add(node)
-        # session.commit()
         index += 1
 
 
 
 def select_electro():
     # Выбор данных из БД
-    from models.electro import ELECTRO
-
-    return session.query(ELECTRO).order_by(ELECTRO.meter.desc())
-    # for electro in session.query(ELECTRO):#.filter_by(month='24.06.2020'):
-    #     print(electro.month)
-    #     print(electro)
+    from models.electro import db, ELECTRO
+    return db.session.query(ELECTRO).order_by(ELECTRO.meter.desc())
 
 
 def add_node_electro(month="", typeMeter="По одноставочному тарифу:", meter=""):
     #Добавить запись в таблицу electro
-    from models.electro import ELECTRO
+    from models.electro import db, ELECTRO
     node = ELECTRO(month=month, typeMeter=typeMeter, meter=meter)
-    session.add(node)
-    session.commit()
-
-
-def versqlachemy():
-    # выводит версию подключеной sqlAlchemy
-    print("Версия SQLAlchemy:", sqlalchemy.__version__)
+    db.session.add(node)
+    db.session.commit()
 
 
 def readcsv():
@@ -76,11 +61,20 @@ def readcsv():
 
 
 def del_nodes_elctro():
-    from models.electro import ELECTRO
-    session.query(ELECTRO).delete()
-    session.commit()
+    # удаляет записи из таблицы
+    from models.electro import  db, ELECTRO
+    db.session.query(ELECTRO).delete()
+    db.session.commit()
+
 
 def drop_electro():
     from models.electro import ELECTRO
-    ELECTRO.__table__.drop(engine)
+    # from main import db
+    ELECTRO.__table__.drop()
     # session.
+
+
+# def versqlachemy():
+#     # выводит версию подключеной sqlAlchemy
+#     print("Версия SQLAlchemy:", sqlalchemy.__version__)
+
