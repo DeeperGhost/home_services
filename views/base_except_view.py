@@ -15,4 +15,5 @@ def base_view_except(f):
             fin.write(str(datetime.datetime.now()) + ";" + str(f.__name__) + "; TemplateNotFound\n")
             fin.close()
             abort(404, description="Resource not found")
+
     return wraped

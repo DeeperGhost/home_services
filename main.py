@@ -1,18 +1,20 @@
 import flask
+from flask import Flask, json, request,render_template
 
 from config import HOST, PORT, DEBUG
 from config import indicatorsPath, pathWork
-
-from flask import Flask, json, request
-from flask import render_template
 
 from views.base_except_view import base_view_except
 from views.indicators import indicators
 from views.upload import upload
 
+from PGdatabase import session
+
+
 app = Flask(__name__)
 app.register_blueprint(indicators)
 app.register_blueprint(upload)
+
 
 
 @app.route('/')
@@ -39,6 +41,11 @@ def get_len():
     name = request.form['name'];
     return json.dumps({'len': len(name)})
 
+
+# @app.teardown_appcontext
+# def shutdown_session(exception=None):
+#     session.remove()
+#
 
 if __name__ == '__main__':
     app.run(host=HOST,port= PORT, debug=DEBUG)

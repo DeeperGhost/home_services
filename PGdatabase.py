@@ -15,9 +15,12 @@ session = Session(bind=engine)
 Base = declarative_base()
 
 
-def initPGdb():
+
+def admin_pg_db():
     # создает все таблицы
     Base.metadata.create_all(engine)
+    #дропает все даблицы
+    # Base.metadata.drop_all(engine)
 
 
 def import_electro(month="00.00.0000", typeMeter= "По одноставочному тарифу", meter="000000"):
@@ -25,16 +28,18 @@ def import_electro(month="00.00.0000", typeMeter= "По одноставочно
     # на данный момент тестово импортит данные из csv
     from models.electro import ELECTRO
 
-    data = readcsv()
+    with open('data/1.csv', newline='', encoding='utf-8') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+        data = list(spamreader)
+
     index = 1
     while index < len(data):
-        print(data[index])
-        node = ELECTRO(month=data[index][0], typeMeter=data[index][1], meter=data[index][2])
-        session.add(node)
-        session.commit()
-
-        print(index)
+        add_node_electro(month=data[index][0], typeMeter=data[index][1], meter=data[index][2])
+        # node = ELECTRO(month=data[index][0], typeMeter=data[index][1], meter=data[index][2])
+        # session.add(node)
+        # session.commit()
         index += 1
+
 
 
 def select_electro():
@@ -47,7 +52,7 @@ def select_electro():
     #     print(electro)
 
 
-def add_node_electro(month="", typeMeter="", meter=""):
+def add_node_electro(month="", typeMeter="По одноставочному тарифу:", meter=""):
     #Добавить запись в таблицу electro
     from models.electro import ELECTRO
     node = ELECTRO(month=month, typeMeter=typeMeter, meter=meter)
@@ -67,4 +72,15 @@ def readcsv():
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
         data = list(spamreader)
         # spamreader.next()
-        return data
+    return data
+
+
+def del_nodes_elctro():
+    from models.electro import ELECTRO
+    session.query(ELECTRO).delete()
+    session.commit()
+
+def drop_electro():
+    from models.electro import ELECTRO
+    ELECTRO.__table__.drop(engine)
+    # session.
