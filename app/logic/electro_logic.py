@@ -1,4 +1,9 @@
 import csv
+# from app import db
+from app.extensions import db
+from app.models.electro import ELECTRO
+
+# from app.models.electro import ELECTRO
 # from models.electro import ELECTRO, db
 # from sqlalchemy import create_engine, MetaData
 #
@@ -38,13 +43,15 @@ def import_electro(month="00.00.0000", typeMeter= "По одноставочно
 
 def select_electro():
     # Выбор данных из БД
-    from models.electro import db, ELECTRO
+    # from app.models.electro import db, ELECTRO
+    # from app.models.electro import ELECTRO
     return db.session.query(ELECTRO).order_by(ELECTRO.meter.desc())
 
 
 def add_node_electro(month="", typeMeter="По одноставочному тарифу:", meter=""):
     #Добавить запись в таблицу electro
-    from models.electro import db, ELECTRO
+    # from app.models.electro import db, ELECTRO
+    # from app.models.electro import ELECTRO
     node = ELECTRO(month=month, typeMeter=typeMeter, meter=meter)
     db.session.add(node)
     db.session.commit()
@@ -62,13 +69,15 @@ def readcsv():
 
 def del_nodes_elctro():
     # удаляет записи из таблицы
-    from models.electro import db, ELECTRO
+    # from app.models.electro import db, ELECTRO
+    # from app.models.electro import ELECTRO
     db.session.query(ELECTRO).delete()
     db.session.commit()
 
 
 def drop_electro():
-    from models.electro import ELECTRO
+    # from app.models.electro import db, ELECTRO
+    # from app.models.electro import ELECTRO
     # from main import db
     ELECTRO.__table__.drop()
     # session.

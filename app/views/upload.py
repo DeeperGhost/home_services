@@ -2,7 +2,7 @@ import flask
 from flask import Blueprint, render_template, jsonify
 
 from config import pathWork
-from views.base_except_view import base_view_except
+from app.views.base_except_view import base_view_except
 
 
 upload = Blueprint('upload', __name__, template_folder='templates')

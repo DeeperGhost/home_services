@@ -1,5 +1,6 @@
-import csv
-from main import db
+# from app import db
+from app.extensions import db
+
 
 class ELECTRO(db.Model):
     # структура данных Электро покаазаний

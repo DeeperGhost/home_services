@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, json, request
 from config import indicatorsPath
-from views.base_except_view import base_view_except
+from app.views.base_except_view import base_view_except
 
 
 basic_view = Blueprint('basic_view', __name__, template_folder='templates')
