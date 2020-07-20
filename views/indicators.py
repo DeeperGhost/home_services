@@ -20,6 +20,7 @@ indicators = Blueprint('indicators', __name__, template_folder='templates')
 def indicators_show(name=None):
     # показывает таблицу electro из бд
     try:
+        # from PGdatabase import select_electro
         t = select_electro()
         print("m")
         return render_template('indicators.html',  t=t.all())

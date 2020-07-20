@@ -1,5 +1,5 @@
 import csv
-
+# from models.electro import ELECTRO, db
 # from sqlalchemy import create_engine, MetaData
 #
 # from sqlalchemy.ext.declarative import declarative_base
@@ -62,7 +62,7 @@ def readcsv():
 
 def del_nodes_elctro():
     # удаляет записи из таблицы
-    from models.electro import  db, ELECTRO
+    from models.electro import db, ELECTRO
     db.session.query(ELECTRO).delete()
     db.session.commit()
 
