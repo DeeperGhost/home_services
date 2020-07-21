@@ -1,12 +1,8 @@
 import datetime
-from flask import Blueprint, render_template
-from flask import request
-
-from flask import Response
+from flask import request, Response, Blueprint, render_template
 
 from app.logic.electro_logic import admin_pg_db, import_electro, select_electro, readcsv
-from app.logic.electro_logic import add_node_electro, del_nodes_elctro
-
+from app.logic.electro_logic import add_node_electro, del_nodes_electro
 
 from app.views.base_except_view import base_view_except
 from sqlalchemy.exc import SQLAlchemyError
@@ -20,7 +16,6 @@ indicators = Blueprint('indicators', __name__, template_folder='templates')
 def indicators_show(name=None):
     # показывает таблицу electro из бд
     try:
-        # from PGdatabase import select_electro
         t = select_electro()
         print("m")
         return render_template('indicators.html',  t=t.all())
@@ -28,12 +23,6 @@ def indicators_show(name=None):
         error = str(e.__dict__['orig'])
         print(error)
         return render_template('indicators.html',  t="")
-
-    # versqlachemy()
-    # testcreate()
-    # testadd()
-    # readcsv()
-
 
 
 @indicators.route('/add_electro', methods=['GET', 'POST'])
@@ -57,7 +46,6 @@ def import_csv(name=None):
     # импортирует данные из csv
     print(datetime.datetime.today())
     import_electro()
-    # versqlachemy()
     t = select_electro()
     return render_template('indicators.html',  t=t.all())
 
@@ -65,6 +53,7 @@ def import_csv(name=None):
 @indicators.route('/export_csv')
 @base_view_except
 def export_csv():
+    # Экспорт данных в csv на данный момент только наработка (выгружает просто таблицу не из бд)
     # csv = '1,2,3\n4,5,6\n'
     csv1 = readcsv()
     j = []
@@ -82,10 +71,9 @@ def export_csv():
 def del_nodes_electro():
     # Удаляет все записи в ELECTRO
     print(26)
-    del_nodes_elctro()
+    del_nodes_electro()
     t = select_electro()
     return render_template('indicators.html',  t=t.all())
-
 
 
 @indicators.route('/admin_pg')

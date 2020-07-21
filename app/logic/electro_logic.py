@@ -1,21 +1,7 @@
 import csv
-# from app import db
+
 from app.extensions import db
 from app.models.electro import ELECTRO
-
-# from app.models.electro import ELECTRO
-# from models.electro import ELECTRO, db
-# from sqlalchemy import create_engine, MetaData
-#
-# from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy.orm import Session
-
-# from models.electro import ELECTRO2, db
-# engine = create_engine('postgresql://' + POSTGRES_USER + ':' + POSTGRES_PW + '@localhost/' + POSTGRES_DB, echo=False)
-# metadata = MetaData(bind=engine)
-# session = Session(bind=engine)
-# Base = declarative_base()
-#
 
 
 def admin_pg_db():
@@ -29,7 +15,6 @@ def admin_pg_db():
 def import_electro(month="00.00.0000", typeMeter= "По одноставочному тарифу", meter="000000"):
     # Функция для добавление записи в таблицу БД
     # на данный момент тестово импортит данные из csv
-
     with open('data/1.csv', newline='', encoding='utf-8') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
         data = list(spamreader)
@@ -40,18 +25,13 @@ def import_electro(month="00.00.0000", typeMeter= "По одноставочно
         index += 1
 
 
-
 def select_electro():
     # Выбор данных из БД
-    # from app.models.electro import db, ELECTRO
-    # from app.models.electro import ELECTRO
     return db.session.query(ELECTRO).order_by(ELECTRO.meter.desc())
 
 
 def add_node_electro(month="", typeMeter="По одноставочному тарифу:", meter=""):
     #Добавить запись в таблицу electro
-    # from app.models.electro import db, ELECTRO
-    # from app.models.electro import ELECTRO
     node = ELECTRO(month=month, typeMeter=typeMeter, meter=meter)
     db.session.add(node)
     db.session.commit()
@@ -67,18 +47,14 @@ def readcsv():
     return data
 
 
-def del_nodes_elctro():
+def del_nodes_electro():
     # удаляет записи из таблицы
-    # from app.models.electro import db, ELECTRO
-    # from app.models.electro import ELECTRO
     db.session.query(ELECTRO).delete()
     db.session.commit()
 
 
 def drop_electro():
-    # from app.models.electro import db, ELECTRO
-    # from app.models.electro import ELECTRO
-    # from main import db
+    # удаляет таблицу ELECTRO работоспособность и нужность неопределена
     ELECTRO.__table__.drop()
     # session.
 
