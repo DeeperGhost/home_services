@@ -50,6 +50,7 @@ def readcsv():
 def del_nodes_electro():
     # удаляет записи из таблицы
     db.session.query(ELECTRO).delete()
+    # db.session.query(ELECTRO).delete(synchronize_session=False)
     db.session.commit()
 
 

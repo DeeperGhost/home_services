@@ -32,11 +32,11 @@ def add_electro():
     # Добавление зпписи из формы в бд
     if request.method == "POST":
         number = request.form
-        print(number['date'] +" " + number['number'])
+        print(number['date'] + " " + number['number'])
         add_node_electro(month=number['date'], meter=number['number'])
 
     t = select_electro()
-    print(t)
+
     return render_template('indicators.html',  t=t.all())
 
 
@@ -54,23 +54,21 @@ def import_csv(name=None):
 @base_view_except
 def export_csv():
     # Экспорт данных в csv на данный момент только наработка (выгружает просто таблицу не из бд)
-    # csv = '1,2,3\n4,5,6\n'
-    csv1 = readcsv()
+    t = select_electro()
     j = []
-    for i in csv1:
-        x = ";".join(i)
-        j.append(x)
-    csv = "\n".join(j)
-    # print(k)
+    for i in t:
+        j.append(str(i))
+    csv = ("\n".join(j)).replace(",", ";")
+
     return Response(csv, mimetype="text/csv",
                     headers={"Content-disposition": "attachment; filename= myplot.csv"})
 
 
 @indicators.route('/control')
 @base_view_except
-def del_nodes_electro():
+def drop_nodes_electro():
     # Удаляет все записи в ELECTRO
-    print(26)
+    print(24)
     del_nodes_electro()
     t = select_electro()
     return render_template('indicators.html',  t=t.all())

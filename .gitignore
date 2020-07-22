@@ -1,5 +1,4 @@
 /venv
 /data/*
 /.idea*
-/app/static/js/jquery-3.5.1.js
 __pycache__/
