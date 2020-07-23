@@ -14,8 +14,8 @@ def create_app(config_object=ConfigObject):
 
     register_extensions(app)
     register_blueprints(app)
-    # app.run(host='192.168.0.102', port='5000', debug=True)
-    return app
+    app.run(host='192.168.0.102', port='5000', debug=True)
+    # return app
 
 
 def register_extensions(app):
