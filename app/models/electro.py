@@ -9,6 +9,7 @@ class ELECTRO(db.Model):
     month = db.Column(db.String, nullable=True)
     typeMeter = db.Column(db.String, nullable=True)
     meter = db.Column(db.String, nullable=True)
+    Hueter = db.Column(db.String, nullable=True)
 
     def __init__(self, month, typeMeter, meter):
         self.month = month
