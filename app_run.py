@@ -1,5 +1,5 @@
-from config import HOST, PORT, DEBUG
 from app import create_app
+# from config import HOST, PORT, DEBUG
 
 
 if __name__ == '__main__':

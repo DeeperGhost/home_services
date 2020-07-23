@@ -9,7 +9,6 @@ class ELECTRO(db.Model):
     month = db.Column(db.String, nullable=True)
     typeMeter = db.Column(db.String, nullable=True)
     meter = db.Column(db.String, nullable=True)
-    Hueter = db.Column(db.String, nullable=True)
 
     def __init__(self, month, typeMeter, meter):
         self.month = month
@@ -18,6 +17,3 @@ class ELECTRO(db.Model):
 
     def __repr__(self):
         return '%d, %s, %s, %s' % (self.id, self.month, self.typeMeter, self.meter)
-
-
-
